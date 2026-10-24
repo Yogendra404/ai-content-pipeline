@@ -1,0 +1,15 @@
+Git branching basics (reference notes)
+
+A branch in Git is a lightweight movable pointer to a commit. Creating a branch does not copy files; it only creates a new pointer, which is why branching is fast and cheap. The default branch is usually called main (older repositories often use master). HEAD is a special pointer that indicates which branch or commit is currently checked out.
+
+Feature branching: each new feature or bug fix is developed on its own branch created from main. When the work is finished it is merged back, typically through a pull request that allows code review and automated tests to run before the merge.
+
+Merge vs rebase: git merge joins two histories and, unless a fast-forward is possible, creates a merge commit that preserves the exact history. git rebase re-applies commits on top of another base, producing a linear history but rewriting commit hashes. Rebasing commits that have already been pushed and shared with others is discouraged because it rewrites public history.
+
+Trunk-based development: developers integrate small changes into main very frequently, often at least daily, using short-lived branches and feature flags to hide unfinished work. It works best with strong automated testing and continuous integration.
+
+Git Flow: a model with long-lived main and develop branches plus supporting feature, release and hotfix branches. It suits projects with scheduled releases and multiple supported versions, but it adds overhead for teams that deploy continuously.
+
+Merge conflicts happen when two branches change the same lines. Git marks the conflicting regions in the file and the developer must resolve them manually, then commit the result. Keeping branches short-lived and syncing with main often reduces conflicts.
+
+Branch protection rules on hosting platforms such as GitHub can require reviews and passing status checks before changes are merged into main.
